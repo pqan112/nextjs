@@ -62,6 +62,7 @@ export function SignUpForm() {
             toast.success("Sign up successfull");
           },
           onError: (ctx) => {
+            console.log(ctx.error);
             toast.error(ctx.error.message);
           },
         }

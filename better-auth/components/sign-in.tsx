@@ -49,7 +49,7 @@ export function SignInForm() {
         {
           email: data.email,
           password: data.password,
-          // callbackURL: "/",
+          callbackURL: "/",
         },
         {
           onSuccess: () => {
