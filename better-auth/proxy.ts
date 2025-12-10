@@ -1,14 +1,13 @@
 import { NextResponse, NextRequest } from "next/server";
-import { auth } from "./lib/auth";
-import { headers } from "next/headers";
+import { authSession } from "./lib/auth-utils";
 
-const privatePaths = ["/"];
+const privatePaths = ["/home", "update-profile"];
 const unAuthPaths = ["/sign-in", "sign-up"];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await authSession();
   if (privatePaths.some((pp) => pathname.startsWith(pp)) && !session) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
@@ -19,5 +18,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/sign-in"],
+  matcher: ["/", "/sign-in", "/update-profile"],
 };
