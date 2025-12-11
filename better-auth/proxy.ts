@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { authSession } from "./lib/auth-utils";
 
-const privatePaths = ["/home", "update-profile"];
+const privatePaths = ["update-profile"];
 const unAuthPaths = ["/sign-in", "sign-up"];
 
 export async function proxy(request: NextRequest) {
