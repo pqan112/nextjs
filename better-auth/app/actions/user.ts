@@ -1,12 +1,12 @@
-"user server";
+"use server";
 
 import { authSession } from "@/lib/auth-utils";
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 export async function updateProfile() {
   const session = await authSession();
 
   if (!session) {
-    throw new Error("Unauthorized");
+    return null;
   }
 
   const user = await db.user.findUnique({

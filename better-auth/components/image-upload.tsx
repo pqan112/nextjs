@@ -38,7 +38,10 @@ export default function ImageUpload({
         </div>
 
         <div className="mt-3 flex gap-2">
-          <Trash className="absolute rounded-full left-40 cursor-pointer top-0 text-rose-600" />
+          <Trash
+            className="absolute rounded-full left-40 cursor-pointer top-0 text-rose-600"
+            onClick={() => setValue(null)}
+          />
         </div>
       </div>
     );

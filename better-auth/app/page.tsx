@@ -1,7 +1,9 @@
-import React from "react";
+import { authSession } from "@/lib/auth-utils";
 
-function Home() {
-  return <div>Hello abc, this is homepage</div>;
+async function Home() {
+  const session = await authSession();
+  console.log(session?.user);
+  return <div>Hello {session?.user.name}, this is homepage</div>;
 }
 
 export default Home;
