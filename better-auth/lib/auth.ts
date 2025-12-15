@@ -5,6 +5,7 @@ import { nextCookies } from "better-auth/next-js";
 import { sendVerificationEmail } from "./send-verification-email";
 import { twoFactor } from "better-auth/plugins";
 import { sendOtpEmail } from "./send-otp-email";
+import { sendResetPasswordEmail } from "./send-reset-password-email";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -13,6 +14,13 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
+    sendResetPassword: async ({ url }) => {
+      void sendResetPasswordEmail({
+        to: "anpham1122000@gmail.com",
+        subject: "Reset Password",
+        url,
+      });
+    },
   },
   emailVerification: {
     sendOnSignUp: true,
@@ -31,6 +39,11 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       prompt: "select_account",
     },
+  },
+  rateLimit: {
+    enabled: true,
+    window: 10,
+    max: 3,
   },
   plugins: [
     nextCookies(),

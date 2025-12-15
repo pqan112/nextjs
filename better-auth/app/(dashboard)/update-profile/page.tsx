@@ -9,10 +9,8 @@ export default async function UpdateProfilePage() {
   const user = await updateProfile();
   if (!user) redirect("/sign-in");
 
-  console.log("user", user);
-
   return (
-    <div className="w-full p-6 mx-auto max-w-7xl min-h-dvh rounded-2xl h-full flex gap-6 justify-center items-start">
+    <div className="w-full p-6 mx-auto max-w-7xl rounded-2xl h-full flex gap-6 justify-center items-start">
       <Suspense fallback="Loading...">
         <UpdateProfile
           email={user.email}

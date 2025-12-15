@@ -59,7 +59,6 @@ export default function ImageUpload({
         appearance={{ container: "rounded-xl border", button: "!bg-blue-700" }}
         onClientUploadComplete={(res) => {
           const url = res?.[0]?.ufsUrl;
-          console.log(res?.[0]?.ufsUrl, res?.[0]?.url);
 
           if (url) {
             setShowDropzone(false);

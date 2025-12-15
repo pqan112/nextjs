@@ -39,8 +39,6 @@ export function ToggleOtpForm({ twoFactorEnabled }: ToggleOtpProps) {
     },
   });
 
-  console.log("twoFactorEnabled", twoFactorEnabled);
-
   const [isOpen, setIsOpen] = useState(false);
 
   const handleChange = () => {
@@ -50,7 +48,6 @@ export function ToggleOtpForm({ twoFactorEnabled }: ToggleOtpProps) {
   const onSubmit = async ({ password }: z.infer<typeof formSchema>) => {
     try {
       if (twoFactorEnabled) {
-        console.log("disable");
         const { error } = await authClient.twoFactor.disable({ password });
 
         if (error) {
@@ -61,18 +58,14 @@ export function ToggleOtpForm({ twoFactorEnabled }: ToggleOtpProps) {
         toast.success("Two factor authentication disabled");
         router.refresh();
       } else {
-        console.log("enable");
-
-        const { data, error } = await authClient.twoFactor.enable({ password });
-
-        console.log({ data, error });
+        const { error } = await authClient.twoFactor.enable({ password });
 
         if (error) {
           toast.error(error.message);
           return;
         }
 
-        // toast.success("Two factor authentication enabled");
+        toast.success("Two factor authentication enabled");
         router.refresh();
       }
     } catch {

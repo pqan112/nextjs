@@ -3,6 +3,9 @@
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { authSession } from "@/lib/auth-utils";
+import { createAuthClient } from "better-auth/react";
+import { useEffect, useState } from "react";
 
 export default function SignOutButton() {
   const router = useRouter();
