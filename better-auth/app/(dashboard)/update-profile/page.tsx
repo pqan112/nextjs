@@ -9,6 +9,8 @@ export default async function UpdateProfilePage() {
   const user = await updateProfile();
   if (!user) redirect("/sign-in");
 
+  console.log("user", user);
+
   return (
     <div className="w-full p-6 mx-auto max-w-7xl min-h-dvh rounded-2xl h-full flex gap-6 justify-center items-start">
       <Suspense fallback="Loading...">
@@ -22,7 +24,10 @@ export default async function UpdateProfilePage() {
       <ChangePasswordForm />
 
       <Suspense fallback="Loading...">
-        <ToggleOtpForm twoFactorEnabled={user.twoFactorEnabled} />
+        <ToggleOtpForm
+          twoFactorEnabled={user.twoFactorEnabled}
+          key={user.twoFactorEnabled.toString()}
+        />
       </Suspense>
     </div>
   );

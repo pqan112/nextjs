@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { authSession } from "./lib/auth-utils";
 
-const privatePaths = ["update-profile"];
+const privatePaths = ["/update-profile", "/two-factor"];
 const unAuthPaths = ["/sign-in", "sign-up"];
 
 export async function proxy(request: NextRequest) {
@@ -18,5 +18,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/sign-in", "/update-profile"],
+  matcher: ["/", "/sign-in", "/update-profile", "/two-factor"],
 };

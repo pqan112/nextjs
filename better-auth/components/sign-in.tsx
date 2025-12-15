@@ -53,28 +53,18 @@ export function SignInForm() {
           callbackURL: "/",
         },
         {
-          onSuccess: () => {
-            toast.message("login successfully");
+          onSuccess: async () => {
+            const { error } = await authClient.twoFactor.sendOtp({});
+            if (error) {
+              toast.error(error.message);
+            }
+            router.push("/two-factor");
           },
 
           onError: (ctx) => {
             toast.message(ctx.error.message);
           },
         }
-        // {
-        //   onSuccess: async () => {
-        //     const { error } = await authClient.twoFactor.sendOtp({});
-
-        //     if (error) {
-        //       toast.error(error.message);
-        //     }
-
-        //     router.push("/two-factor");
-        //   },
-        //   onError: (ctx) => {
-        //     toast.error(ctx.error.message);
-        //   },
-        // }
       );
     } catch (e) {
       console.log(e);
