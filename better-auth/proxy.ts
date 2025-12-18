@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { authSession } from "./lib/auth-utils";
 
-const privatePaths = ["/update-profile"];
+const privatePaths = ["/update-profile", "/user-management"];
 const unAuthPaths = [
   "/sign-in",
   "/sign-up",

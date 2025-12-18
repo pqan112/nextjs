@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export interface User {
+export interface UserProps {
   id: string;
   name: string;
   role: string;
@@ -9,23 +9,30 @@ export interface User {
   hasDeletePermission: boolean;
 }
 
-interface UserModal {
-  user: User;
+interface UserModalProps {
+  user: UserProps;
+  setUser: (user: UserProps) => void;
   isOpen: boolean;
-  setUser: (user: User) => void;
   setIsOpen: (isOpen: boolean) => void;
 }
 
-export const useUser = create<UserModal>((set) => ({
+interface UserModalProps {
+  user: UserProps;
+  isOpen: boolean;
+  setUser: (user: UserProps) => void;
+  setIsOpen: (isOpen: boolean) => void;
+}
+
+export const useUsers = create<UserModalProps>((set) => ({
   isOpen: false,
   setIsOpen: (isOpen: boolean) => set({ isOpen }),
   user: {
     id: "",
     name: "",
-    role: "",
+    role: "user",
     email: "",
     emailVerified: false,
     hasDeletePermission: false,
   },
-  setUser: (user: User) => set({ user }),
+  setUser: (user: UserProps) => set({ user }),
 }));
